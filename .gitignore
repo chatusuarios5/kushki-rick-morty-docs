@@ -1,0 +1,22 @@
+node_modules/
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+
+# Variables de entorno: nunca se versionan claves reales.
+.env
+.env.local
+.env.*.local
+
+# Playwright
+test-results/
+playwright-report/
+
+.DS_Store
+npm-debug.log*
+
+# Vercel: vínculo local del proyecto y cualquier archivo .env (salvo la plantilla).
+.vercel
+.env*
+!.env.example

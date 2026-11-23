@@ -1,0 +1,257 @@
+.layout {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr) 250px;
+  align-items: start;
+  gap: 48px;
+  padding-top: 56px;
+}
+
+/* ==========================================================================
+   Índice lateral
+   ========================================================================== */
+.toc,
+.rail {
+  position: sticky;
+  top: calc(var(--nav-height) + 32px);
+}
+
+.tocTitle {
+  margin: 0 0 14px;
+  color: var(--text-dim);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.toc ol {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid var(--border-strong);
+  list-style: none;
+}
+
+.toc a {
+  display: block;
+  margin-left: -1px;
+  padding: 6px 0 6px 16px;
+  border-left: 2px solid transparent;
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  transition:
+    color 0.2s var(--ease),
+    border-color 0.2s var(--ease);
+}
+
+.toc a:hover {
+  border-left-color: var(--portal);
+  color: #fff;
+}
+
+.tocSub a {
+  padding-left: 30px;
+  font-size: 0.8rem;
+}
+
+/* ==========================================================================
+   Contenido (Markdown)
+   ========================================================================== */
+.prose {
+  min-width: 0;
+  padding: clamp(24px, 4vw, 44px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow);
+}
+
+.prose h1 {
+  margin: 0 0 18px;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #d9fbff 0%, var(--cyan) 55%, var(--cyan-deep) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* La firma del endpoint, justo debajo del título. */
+.prose h1 + p code {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid rgba(151, 206, 76, 0.35);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--portal);
+  font-size: 0.9rem;
+  word-break: break-all;
+}
+
+.prose h2 {
+  margin: 56px 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.prose h3 {
+  margin: 36px 0 12px;
+  color: #fff;
+  font-size: 1.15rem;
+}
+
+.prose p,
+.prose li {
+  color: #d3d9e1;
+}
+
+.prose strong {
+  color: #fff;
+}
+
+.prose :not(pre) > code {
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: rgba(65, 209, 234, 0.1);
+  color: var(--cyan);
+  font-size: 0.86em;
+}
+
+.prose blockquote {
+  margin: 24px 0;
+  padding: 14px 20px;
+  border: 1px solid rgba(151, 206, 76, 0.25);
+  border-left: 4px solid var(--portal);
+  border-radius: var(--radius-sm);
+  background: var(--accent-soft);
+}
+
+.prose blockquote p {
+  margin: 0;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 22px;
+}
+
+.prose li::marker {
+  color: var(--portal);
+}
+
+.prose li + li {
+  margin-top: 6px;
+}
+
+.tableWrap {
+  margin: 18px 0 28px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.prose th {
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.prose td {
+  padding: 12px 14px;
+  border-top: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.prose td:first-child {
+  white-space: nowrap;
+}
+
+.prose tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.codeWrap {
+  position: relative;
+  margin: 18px 0 28px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.copy {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   Columna derecha: llamada a la acción con brillo de portal
+   ========================================================================== */
+.cta {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  padding: 24px 22px;
+  overflow: hidden;
+  border: 1px solid rgba(151, 206, 76, 0.3);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(ellipse 90% 60% at 50% 120%, rgba(151, 206, 76, 0.45), transparent 70%),
+    linear-gradient(180deg, #151a21, #07090d);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.ctaTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.ctaText {
+  margin: 0 0 6px;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+@media (max-width: 1100px) {
+  .layout {
+    grid-template-columns: 180px minmax(0, 1fr);
+  }
+
+  .rail {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .toc {
+    position: static;
+  }
+}

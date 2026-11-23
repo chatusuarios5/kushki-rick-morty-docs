@@ -1,0 +1,15 @@
+# Archivos que no se suben a Vercel.
+node_modules
+.next
+out
+.vercel
+
+# Secretos: en Vercel se configuran como variables de entorno del proyecto.
+.env
+.env.local
+.env.*.local
+
+# Pruebas y artefactos locales
+test-results
+playwright-report
+*.tsbuildinfo

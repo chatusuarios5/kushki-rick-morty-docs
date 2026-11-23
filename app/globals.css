@@ -1,0 +1,474 @@
+/* ==========================================================================
+   Sistema de diseño — "Interdimensional"
+   Espacio profundo, estrellas, verde portal y cian del logotipo.
+   ========================================================================== */
+:root {
+  color-scheme: dark;
+
+  /* Superficies */
+  --bg: #06080c;
+  --bg-elev: #10141b;
+  --bg-elev-2: #181e27;
+  --bg-code: #0a0d12;
+  --glass: rgba(16, 20, 27, 0.72);
+
+  /* Líneas */
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.2);
+  --ink: #000;
+
+  /* Texto */
+  --text: #f4f6f8;
+  --text-muted: #a9b2be;
+  --text-dim: #6d7786;
+
+  /* Paleta Rick and Morty */
+  --portal: #97ce4c;
+  --portal-bright: #c4ff6b;
+  --portal-deep: #2f7d1c;
+  --portal-glow: rgba(151, 206, 76, 0.45);
+  --cyan: #41d1ea;
+  --cyan-deep: #0e8fae;
+  --yellow: #f2e55c;
+  --brown: #3a2513;
+
+  --accent: #3cb34a;
+  --accent-strong: #2e9a3b;
+  --accent-soft: rgba(151, 206, 76, 0.12);
+  --accent-ring: rgba(151, 206, 76, 0.4);
+
+  /* Semánticos */
+  --alive: #97ce4c;
+  --alive-soft: rgba(151, 206, 76, 0.1);
+  --dead: #ff6262;
+  --unknown: #8d97a6;
+  --warn: #f5b942;
+  --warn-soft: rgba(245, 185, 66, 0.1);
+  --danger: #ff6262;
+  --danger-soft: rgba(255, 98, 98, 0.1);
+
+  /* Forma */
+  --radius-xl: 28px;
+  --radius-lg: 20px;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+  --shadow-glow: 0 0 0 1px rgba(151, 206, 76, 0.35), 0 12px 40px rgba(151, 206, 76, 0.18);
+
+  --container: 1200px;
+  --nav-height: 68px;
+
+  --font-sans: var(--font-inter), "Segoe UI", Roboto, Arial, sans-serif;
+  --font-mono: var(--font-jetbrains), Consolas, "Courier New", monospace;
+  --font-display: var(--font-luckiest), "Arial Black", Impact, sans-serif;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-height) + 16px);
+}
+
+body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: clip;
+  /* Fondo: azul petróleo a la izquierda y granate a la derecha, como un viaje entre dimensiones. */
+  background:
+    radial-gradient(ellipse 70% 60% at 0% 20%, rgba(36, 86, 110, 0.55), transparent 70%),
+    radial-gradient(ellipse 60% 60% at 100% 70%, rgba(92, 30, 38, 0.55), transparent 70%),
+    linear-gradient(180deg, #0b1219 0%, #07090d 55%, #0d0809 100%);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Campo de estrellas fijo detrás de todo el contenido. */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+body::before {
+  background-image:
+    radial-gradient(1px 1px at 20px 30px, rgba(255, 255, 255, 0.8), transparent 60%),
+    radial-gradient(1px 1px at 140px 90px, rgba(255, 255, 255, 0.6), transparent 60%),
+    radial-gradient(1.5px 1.5px at 90px 160px, rgba(255, 255, 255, 0.7), transparent 60%),
+    radial-gradient(1px 1px at 210px 210px, rgba(255, 255, 255, 0.5), transparent 60%),
+    radial-gradient(1px 1px at 260px 40px, rgba(196, 255, 107, 0.6), transparent 60%);
+  background-size: 300px 260px;
+  opacity: 0.55;
+}
+
+body::after {
+  background-image:
+    radial-gradient(1.5px 1.5px at 60px 110px, rgba(255, 255, 255, 0.9), transparent 60%),
+    radial-gradient(2px 2px at 330px 260px, rgba(65, 209, 234, 0.7), transparent 60%),
+    radial-gradient(1px 1px at 420px 60px, rgba(255, 255, 255, 0.8), transparent 60%);
+  background-size: 480px 420px;
+  animation: twinkle 6s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  from {
+    opacity: 0.25;
+  }
+  to {
+    opacity: 0.75;
+  }
+}
+
+body > main {
+  flex: 1;
+}
+
+::selection {
+  background: var(--portal);
+  color: #0a0d12;
+}
+
+a {
+  color: var(--portal);
+  text-decoration: none;
+  transition: color 0.2s var(--ease);
+}
+
+a:hover {
+  color: var(--portal-bright);
+}
+
+img {
+  max-width: 100%;
+}
+
+code,
+pre,
+kbd {
+  font-family: var(--font-mono);
+}
+
+button {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--portal);
+  outline-offset: 3px;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   Tipografía de cartel
+   ========================================================================== */
+.display {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* Relleno cian degradado. Va en cada letra: background-clip:text no alcanza a hijos transformados. */
+.logo-fill {
+  display: inline-block;
+  background: linear-gradient(180deg, #e4fdff 0%, #7fe6f5 35%, var(--cyan) 60%, var(--cyan-deep) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Estilo "logotipo": contorno marrón y halo amarillo verdoso alrededor de todo el rótulo. */
+.display-logo {
+  filter: drop-shadow(1.5px 0 0 var(--brown)) drop-shadow(-1.5px 0 0 var(--brown)) drop-shadow(0 1.5px 0 var(--brown))
+    drop-shadow(0 -1.5px 0 var(--brown)) drop-shadow(2.5px 0 0 var(--yellow)) drop-shadow(-2.5px 0 0 var(--yellow))
+    drop-shadow(0 2.5px 0 var(--yellow)) drop-shadow(0 -2.5px 0 var(--yellow)) drop-shadow(0 0 18px rgba(151, 206, 76, 0.35));
+}
+
+/* ==========================================================================
+   Componentes compartidos
+   ========================================================================== */
+
+/* Etiqueta de método HTTP + ruta. */
+.endpoint {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 14px 5px 5px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--glass);
+  backdrop-filter: blur(8px);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.method {
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: var(--portal);
+  color: #0a0d12;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 0 28px;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    transform 0.25s var(--ease),
+    box-shadow 0.25s var(--ease),
+    background 0.25s var(--ease),
+    color 0.25s var(--ease),
+    border-color 0.25s var(--ease);
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: progress;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 6px 24px rgba(60, 179, 74, 0.35);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #47c756;
+  color: #fff;
+  box-shadow:
+    0 0 0 4px rgba(151, 206, 76, 0.18),
+    0 10px 36px rgba(151, 206, 76, 0.5);
+}
+
+.btn-ghost {
+  border-color: rgba(255, 255, 255, 0.85);
+  color: #fff;
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: #fff;
+  color: #07090d;
+}
+
+.section-title {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.section-subtitle {
+  max-width: 620px;
+  margin: 0 0 28px;
+  color: var(--text-muted);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 5px 12px;
+  border: 1px solid rgba(151, 206, 76, 0.35);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--portal);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--portal);
+  box-shadow: 0 0 10px var(--portal);
+}
+
+.panel {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow);
+}
+
+/* Bloques de código y JSON. */
+.code-block {
+  margin: 0;
+  padding: 16px 18px;
+  overflow: auto;
+  background: var(--bg-code);
+  color: #dfe6ee;
+  font-size: 0.84rem;
+  line-height: 1.7;
+  tab-size: 2;
+}
+
+.tok-key {
+  color: var(--cyan);
+}
+
+.tok-string {
+  color: #b6ef6e;
+}
+
+.tok-number {
+  color: #ffcf6b;
+}
+
+.tok-literal {
+  color: #ff8bd1;
+}
+
+kbd {
+  display: inline-grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border: 1px solid var(--border-strong);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  background: var(--bg-elev-2);
+  color: var(--text);
+  font-size: 0.72rem;
+}
+
+/* Estados de carga. */
+.skeleton {
+  border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, #141922 0%, #1f2631 50%, #141922 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+/* Pie de página. */
+.site-footer {
+  position: relative;
+  margin-top: 120px;
+  padding-block: 32px;
+  border-top: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(6, 8, 12, 0.4), #040507);
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  width: min(600px, 80%);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--portal), transparent);
+  transform: translateX(-50%);
+  box-shadow: 0 0 24px 2px var(--portal-glow);
+}
+
+.site-footer .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

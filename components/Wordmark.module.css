@@ -1,0 +1,47 @@
+.wordmark {
+  display: inline-flex;
+  user-select: none;
+}
+
+/* Versión grande, en dos líneas. */
+.stacked {
+  flex-direction: column;
+  align-items: center;
+  font-size: clamp(4.2rem, 13vw, 9.5rem);
+  line-height: 0.85;
+}
+
+.line {
+  display: inline-flex;
+  align-items: flex-start;
+}
+
+.lineTwo {
+  margin-left: 0.35em;
+}
+
+.amp {
+  margin-left: 0.04em;
+  font-size: 0.5em;
+  transform: rotate(8deg) translateY(0.15em);
+}
+
+/* Versión compacta, para la barra de navegación. */
+.inline {
+  font-size: 1.55rem;
+  line-height: 1;
+  filter: drop-shadow(1px 0 0 var(--brown)) drop-shadow(-1px 0 0 var(--brown)) drop-shadow(0 1px 0 var(--brown))
+    drop-shadow(0 -1px 0 var(--brown)) drop-shadow(1.5px 0 0 var(--yellow)) drop-shadow(-1.5px 0 0 var(--yellow))
+    drop-shadow(0 1.5px 0 var(--yellow)) drop-shadow(0 -1.5px 0 var(--yellow));
+}
+
+.inlineInner {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.and {
+  margin: 0 0.18em;
+  font-size: 0.5em;
+  transform: translateY(-0.2em);
+}

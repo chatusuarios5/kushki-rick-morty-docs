@@ -1,0 +1,159 @@
+/* ==========================================================================
+   Portal
+   El disco es un círculo achatado con scaleY: el giro interior parece en perspectiva.
+   ========================================================================== */
+.portalWrap {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 340px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.portalGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 55% 70% at 50% 100%, rgba(151, 206, 76, 0.55), rgba(151, 206, 76, 0.12) 55%, transparent 75%);
+}
+
+.portal {
+  position: absolute;
+  bottom: -700px;
+  left: 50%;
+  width: 1400px;
+  height: 1400px;
+  transform: translateX(-50%) scaleY(0.2);
+}
+
+.portalCore,
+.portalSwirl,
+.portalRim {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.portalCore {
+  inset: 0;
+  background: radial-gradient(
+    circle,
+    #f7ffe0 0%,
+    #dcff8a 9%,
+    #a8ea3c 22%,
+    #62c11f 38%,
+    #2f8a17 52%,
+    rgba(22, 84, 12, 0.6) 60%,
+    transparent 68%
+  );
+}
+
+.portalSwirl {
+  inset: 6%;
+  mix-blend-mode: screen;
+  -webkit-mask: radial-gradient(circle, transparent 6%, #000 22%, #000 48%, transparent 64%);
+  mask: radial-gradient(circle, transparent 6%, #000 22%, #000 48%, transparent 64%);
+}
+
+.swirlA {
+  background: repeating-conic-gradient(from 0deg, rgba(235, 255, 180, 0) 0deg, rgba(235, 255, 180, 0.7) 9deg, rgba(235, 255, 180, 0) 24deg);
+  filter: blur(6px);
+  animation: spin-portal 18s linear infinite;
+}
+
+.swirlB {
+  inset: 14%;
+  background: repeating-conic-gradient(from 10deg, rgba(120, 220, 40, 0) 0deg, rgba(190, 255, 110, 0.65) 6deg, rgba(120, 220, 40, 0) 17deg);
+  filter: blur(4px);
+  animation: spin-portal 11s linear infinite reverse;
+}
+
+.portalRim {
+  inset: 16%;
+  box-shadow:
+    0 0 0 10px rgba(196, 255, 107, 0.25),
+    0 0 120px 40px rgba(151, 206, 76, 0.35);
+  opacity: 0.6;
+}
+
+@keyframes spin-portal {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   Platillo
+   ========================================================================== */
+.saucer {
+  position: relative;
+  width: 220px;
+  height: 170px;
+}
+
+.dome {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 104px;
+  height: 104px;
+  overflow: hidden;
+  border: 4px solid #111;
+  border-radius: 50% 50% 46% 46%;
+  background: #8ad7e6;
+  transform: translateX(-50%);
+}
+
+.domeImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.25) translateY(8%);
+}
+
+.domeShine {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 38%), rgba(120, 220, 240, 0.18);
+}
+
+.hull {
+  position: absolute;
+  top: 70px;
+  left: 0;
+  width: 220px;
+  height: auto;
+}
+
+.beam {
+  position: absolute;
+  top: 140px;
+  left: 50%;
+  width: 120px;
+  height: 60px;
+  background: radial-gradient(ellipse 50% 100% at 50% 0%, rgba(196, 255, 107, 0.55), transparent 70%);
+  transform: translateX(-50%);
+  filter: blur(4px);
+}
+
+/* ==========================================================================
+   Pegatina
+   ========================================================================== */
+.sticker {
+  overflow: hidden;
+  border: 6px solid #fff;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow:
+    0 0 0 2px rgba(0, 0, 0, 0.6),
+    0 20px 40px rgba(0, 0, 0, 0.55);
+}
+
+.stickerImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

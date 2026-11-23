@@ -1,0 +1,40 @@
+# Validaciones que corren en cada pull request, antes de publicar un cambio.
+# Si un paso falla, el PR no se puede fusionar y la documentación no se despliega.
+name: Docs CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # 1. El código compila y los tipos coinciden con la forma real de la API.
+      - name: Typecheck
+        run: npm run typecheck
+
+      # 2. El verificador de alucinaciones sigue detectando los casos conocidos.
+      - name: Tests
+        run: npm test
+
+      # 3. Ningún enlace de la documentación está roto (incluidos los de la API).
+      - name: Enlaces rotos
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --no-progress --exclude "localhost" "docs/**/*.md" "README.md"
+          fail: true
+
+      # 4. El sitio se construye; si falla aquí, nunca llega a producción.
+      - name: Build
+        run: npm run build
