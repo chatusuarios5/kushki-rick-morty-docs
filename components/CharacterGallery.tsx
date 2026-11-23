@@ -212,7 +212,7 @@ export function CharacterGallery({ initial }: { initial: CharacterPage }) {
           ))}
       </ul>
 
-      <div ref={sentinelRef} className={styles.sentinel} aria-hidden="true" />
+      <div ref={sentinelRef} className={styles.sentinel} data-testid="gallery-sentinel" aria-hidden="true" />
 
       <div className={styles.footer}>
         {state === "loading" && items.length > 0 && (

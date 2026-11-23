@@ -1,4 +1,16 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Locator, type Page } from "@playwright/test";
+
+/**
+ * Baja hasta el centinela del scroll infinito y repite hasta que haya `expected` tarjetas.
+ * Un único scrollTo al final no basta: la página crece mientras se desplaza (scroll suave,
+ * imágenes y tarjetas que se pintan) y el salto puede quedarse corto.
+ */
+async function scrollUntil(page: Page, cards: Locator, expected: number, timeout = 30_000) {
+  await expect(async () => {
+    await page.getByTestId("gallery-sentinel").scrollIntoViewIfNeeded();
+    await expect(cards).toHaveCount(expected, { timeout: 2_500 });
+  }).toPass({ timeout });
+}
 
 test.describe("Portada", () => {
   test("muestra el escenario principal y la navegación", async ({ page }) => {
@@ -16,9 +28,7 @@ test.describe("Portada", () => {
 
     // Bajamos hasta el final varias veces: cada vez debe llegar una página nueva.
     for (const expected of [40, 60]) {
-      await page.mouse.wheel(0, 20_000);
-      await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-      await expect(cards).toHaveCount(expected);
+      await scrollUntil(page, cards, expected);
     }
 
     const hrefs = await cards.evaluateAll((links) => links.map((link) => link.getAttribute("href")));
@@ -33,8 +43,7 @@ test.describe("Portada", () => {
     const cards = grid.locator("li a");
 
     for (let expected = 40; expected <= 160; expected += 20) {
-      await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-      await expect(cards).toHaveCount(expected, { timeout: 30_000 });
+      await scrollUntil(page, cards, expected);
     }
     await expect(page.getByText("La API está limitando las peticiones")).toHaveCount(0);
 
