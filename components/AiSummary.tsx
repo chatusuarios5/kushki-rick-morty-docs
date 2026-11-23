@@ -42,8 +42,7 @@ export function AiSummary({ characterId, characterName }: { characterId: number;
             Resumen del personaje
           </h2>
           <p className={styles.lead}>
-            La IA escribe una ficha creativa de {characterName} usando solo los datos de la API. Después, un
-            verificador automático comprueba que no haya inventado nada.
+            La IA escribe una ficha creativa de {characterName} usando solo los datos de la API.
           </p>
         </div>
         <button type="button" className="btn btn-primary" onClick={generate} disabled={isLoading}>
@@ -75,8 +74,6 @@ export function AiSummary({ characterId, characterName }: { characterId: number;
 
 function SummaryResult({ result }: { result: SummaryResponse }) {
   const text = useTypewriter(result.summary);
-  const { verified, checks } = result.verification;
-  const passed = checks.filter((check) => check.ok).length;
 
   return (
     <div className={styles.result}>
@@ -94,26 +91,6 @@ function SummaryResult({ result }: { result: SummaryResponse }) {
         </footer>
         {result.notice && <p className={styles.notice}>{result.notice}</p>}
       </blockquote>
-
-     <div className={`${styles.verification} ${verified ? styles.verified : styles.unverified}`}>
-        <p className={styles.verificationTitle}>
-          {verified
-            ? `Verificado contra la API · ${passed}/${checks.length} comprobaciones superadas`
-            : `Revisa este texto: la IA pudo haber inventado información (${passed}/${checks.length})`}
-        </p>
-        <ul className={styles.checks}>
-          {checks.map((check) => (
-            <li key={check.label} className={check.ok ? styles.checkOk : styles.checkFail}>
-              <span className={styles.checkIcon} aria-hidden="true">
-                {check.ok ? "✓" : "!"}
-              </span>
-              <span>
-                <strong>{check.label}.</strong> {check.detail}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
     </div>
   );
 }

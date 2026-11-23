@@ -16,7 +16,6 @@ playwright-report/
 .DS_Store
 npm-debug.log*
 
-# Vercel: vínculo local del proyecto y cualquier archivo .env (salvo la plantilla).
+# Vercel: vínculo local del proyecto y cualquier archivo .env.
 .vercel
 .env*
-!.env.example

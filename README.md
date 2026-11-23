@@ -93,15 +93,7 @@ Abre una terminal en la carpeta del proyecto y sigue estos pasos.
    npm install
    ```
 
-2. Crea tu archivo de configuración copiando el de ejemplo. En Mac o Linux usa el primer comando, y en Windows con PowerShell, el segundo.
-
-   ```bash
-   cp .env.example .env.local
-   ```
-
-   ```powershell
-   Copy-Item .env.example .env.local
-   ```
+2. (Opcional) Crea un archivo `.env.local` en la raíz del proyecto con tu clave de Gemini, como se explica en [Cómo configurar la clave de la API de IA](#cómo-configurar-la-clave-de-la-api-de-ia). Sin él, la aplicación funciona igual con resúmenes simulados.
 
 3. Inicia el servidor de desarrollo.
 
@@ -125,7 +117,7 @@ Otros comandos útiles:
 El proyecto usa Gemini de Google, que tiene una capa gratuita.
 
 1. Crea una clave gratuita en [Google AI Studio](https://aistudio.google.com/apikey).
-2. Abre el archivo `.env.local` que creaste en el paso anterior y pega tu clave después del signo igual.
+2. Crea un archivo llamado `.env.local` en la raíz del proyecto con este contenido, pegando tu clave después del signo igual.
 
    ```bash
    GEMINI_API_KEY=tu_clave
@@ -138,9 +130,7 @@ El proyecto usa Gemini de Google, que tiene una capa gratuita.
 
 Si dejas la clave vacía, la aplicación funciona igual, pero usa el modo simulado para los resúmenes.
 
-### El archivo .env.example
-
-En la raíz del proyecto está el archivo `.env.example`. Sirve como referencia de las variables que necesita la aplicación y no contiene ninguna clave real. El archivo `.env.local`, que es donde va tu clave, está incluido en `.gitignore`, así que nunca se sube al repositorio por accidente.
+El archivo `.env.local` está incluido en `.gitignore`, así que tu clave nunca se sube al repositorio por accidente.
 
 ### Si trabajas en CodeSandbox
 
